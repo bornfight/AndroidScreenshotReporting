@@ -22,7 +22,8 @@ import com.jraska.falcon.Falcon
  * Updated and converted to Kotlin by lleopoldovic on 06/08/2019.
  */
 
-class ScreenshotReporting private constructor(private val email: String, private val subject: String) {
+class ScreenshotReporting private constructor(private val email: String, private val subject: String,
+                                              private val body: String) {
 
     private val filter = IntentFilter(ACTION_SCREENSHOT)
     private var mActivityRef: WeakReference<Activity>? = null
@@ -135,8 +136,8 @@ class ScreenshotReporting private constructor(private val email: String, private
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "application/image"
         emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "$subject #android !Task_name" )
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Task description..")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject )
+        emailIntent.putExtra(Intent.EXTRA_TEXT, body)
         emailIntent.putExtra(
             Intent.EXTRA_STREAM,
             FileProvider.getUriForFile(context, context.packageName + ".provider", imageFile)
@@ -157,14 +158,16 @@ class ScreenshotReporting private constructor(private val email: String, private
         private const val ACTION_SCREENSHOT = BuildConfig.APPLICATION_ID + ".SCREENSHOT"
 
         /**
-         * Init Screenshot reporting in Application class
+         * Init Screenshot reporting in Application class.
+         * Structure the params as it suits your needs. If using with Teamwork structure as:
          * @param application main App class
          * @param email Teamwork task-list email for this app
          * @param subject A person to be tagged for tasks ("@username")
-         */
+         * @param body Task description
+         **/
         @JvmStatic
-        fun init(application: Application, email: String, subject: String) {
-            ScreenshotReporting(email, subject).registerApplication(application)
+        fun init(application: Application, email: String, subject: String, body: String) {
+            ScreenshotReporting(email, subject, body).registerApplication(application)
         }
     }
 
