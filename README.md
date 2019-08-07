@@ -11,7 +11,7 @@
 * Initialize the library in your App class:
 ```kotlin
    // Add your project managament service email and default subjects here:
-   ScreenshotReporting.init(application, "bug.report@project.com", "@lukal")
+   ScreenshotReporting.init(application, "bug.report@project.com", "bug name", "bug description")
 ```
 <br/>
 
