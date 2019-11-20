@@ -1,4 +1,4 @@
-# AndroidScreenshotReporting
+# AndroidScreenshotReporting for Teamwork
 * Tool used to help QA teams for easier Android bug reporting.
 * This library enables you to take screenshots of your applications and directly submit them to a project managament service via email.
 * Taken screenshots will capture the entire screen structure (activity + dialogs + etc.), without status bar and native Android buttons.
